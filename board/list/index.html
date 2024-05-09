@@ -7,9 +7,9 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-gov.min.css" />
     <link rel="stylesheet" href="/assets/css/index.css" />
     <link rel="stylesheet" href="./index.css" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.10.4/polyfill.min.js"></script>
-    <script type="text/javascript" src="/assets/js/common.js"></script>
+    <script type="text/javascript" src="/assets/js/babel.min.js"></script>
+    <script type="text/javascript" src="/assets/js/polyfill.min.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
   </head>
   <body>
     <main class="main">
@@ -29,17 +29,7 @@
             <div data-column="views" role="columnheader" aria-label="조회수">조회수</div>
           </div>
         </div>
-        <div id="tableBody" role="rowgroup" aria-label="테이블 본문">
-          <div role="row" aria-label="데이터 행">
-            <div data-column="index" role="cell">1</div>
-            <div data-column="title" role="cell">
-              <a href="#">제목입니다.</a>
-            </div>
-            <div data-column="author" role="cell">홍*동</div>
-            <div data-column="date" role="cell">2024-05-08</div>
-            <div data-column="views" role="cell">1</div>
-          </div>
-        </div>
+        <div id="tableBody" role="rowgroup" aria-label="테이블 본문"></div>
       </div>
 
       <footer class="footer">
@@ -53,5 +43,6 @@
         <a href="/board/write/" class="button-primary"> 회원 글쓰기 </a>
       </footer>
     </main>
+    <script type="module" src="./index.js"></script>
   </body>
 </html>

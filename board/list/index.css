@@ -23,6 +23,7 @@
 }
 
 [role="cell"] {
+  flex: 1;
   padding: 8px;
   border-right: 1px solid #ccc;
 }
