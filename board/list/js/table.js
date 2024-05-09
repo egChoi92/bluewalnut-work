@@ -24,37 +24,42 @@ export const generateData = (length = 40) => {
   }
 };
 
+const maskString = (input) => {
+  const string = input ?? "";
+  const { length } = string;
+
+  if (length <= 2) {
+    return `${length === 2 ? string.charAt(0) : ""}*`;
+  }
+
+  return `${string.charAt(0)}${"*".repeat(Math.max(0, length - 2))}${length > 1 ? string.charAt(length - 1) : ""}`;
+};
+
 export const initializeTable = (articles) => {
   const tableBody = document.querySelector("#tableBody");
+  const perPage = getQueryParamValue("perPage");
   const isEmptyArticle = !articles || !articles.length;
-  const maskString = (input) => {
-    const string = input ?? "";
-    const { length } = string;
-
-    if (length <= 2) {
-      return `${length === 2 ? string.charAt(0) : ""}*`;
-    }
-
-    return `${string.charAt(0)}${"*".repeat(Math.max(0, length - 2))}${length > 1 ? string.charAt(length - 1) : ""}`;
-  };
 
   renderHTMl(tableBody, () => {
-    return isEmptyArticle
-      ? removeExtraSpacesBeforeTags(`
+    if (isEmptyArticle) {
+      return removeExtraSpacesBeforeTags(`
 			<div role="row">
 				<div role="cell">등록된 글이 없습니다.</div>
 			</div>
-		`)
-      : articles?.map((article) => {
-          return removeExtraSpacesBeforeTags(`
-					<div role="row">
-						<div data-column="index" role="cell">${article.index}</div>
-						<div data-column="title" role="cell"><a href="/board/write/?id=${article.id}">${article.title}</a></div>
-						<div data-column="author" role="cell">${maskString(article.author)}</div>
-						<div data-column="date" role="cell">${article.date}</div>
-						<div data-column="views" role="cell">${article.views}</div>
-					</div>
-				`);
-        });
+		`);
+    } else {
+      const slicedArticles = articles.slice(0, Math.min(perPage, articles.length));
+      return slicedArticles.map((article) => {
+        return removeExtraSpacesBeforeTags(`
+        <div role="row">
+          <div data-column="index" role="cell">${article.index}</div>
+          <div data-column="title" role="cell"><a href="/board/write/?id=${article.id}">${article.title}</a></div>
+          <div data-column="author" role="cell">${maskString(article.author)}</div>
+          <div data-column="date" role="cell">${article.date}</div>
+          <div data-column="views" role="cell">${article.views}</div>
+        </div>
+      `);
+      });
+    }
   });
 };

@@ -12,3 +12,15 @@ const renderHTMl = (container, callbackFunction) => {
 };
 
 const removeExtraSpacesBeforeTags = (template) => template.replace(/\s+\</g, "<").trim();
+
+const redirectToUpdatedUrl = (key, value) => {
+  const urlObject = new URL(window.location.href);
+  urlObject.searchParams.set(key, value);
+  window.location.href = urlObject.href;
+};
+
+const getQueryParamValue = (key) => {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  return urlParams.get(key);
+};

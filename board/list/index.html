@@ -14,12 +14,10 @@
   <body>
     <main class="main">
       <header class="header">
-        <select class="select" id="perPage" aria-controls="table" aria-label="게시판에서 표시할 항목 수 선택">
-          <option value="10">10개씩 보기</option>
-        </select>
+        <select class="select" id="perPageSelector" aria-controls="table" aria-label="게시판에서 표시할 항목 수 선택"></select>
       </header>
 
-      <div id="table" role="table" aria-label="게시판 테이블" aria-describedby="perPage">
+      <div id="table" role="table" aria-label="게시판 테이블" aria-describedby="perPageSelector">
         <div id="tableHead" role="rowgroup" aria-label="테이블 헤더">
           <div role="row" aria-label="헤더 행">
             <div data-column="index" role="columnheader" aria-label="순번">순번</div>
@@ -29,13 +27,13 @@
             <div data-column="views" role="columnheader" aria-label="조회수">조회수</div>
           </div>
         </div>
-        <div id="tableBody" role="rowgroup" aria-label="테이블 본문"></div>
+        <div id="tableBody" role="rowgroup" aria-label="테이블 본문" aria-live="polite"></div>
       </div>
 
       <footer class="footer">
         <nav class="pagination-wrapper" aria-label="페이지 네비게이션">
           <button type="button" id="firstPage" class="pagination-button-box" aria-label="처음 페이지로 이동">&lt;</button>
-          <div id="paginationContainer">
+          <div id="paginationContainer" aria-live="polite">
             <button type="button" class="pagination-button" aria-label="1 페이지로 이동">1</button>
           </div>
           <button type="button" id="lastPage" class="pagination-button-box" aria-label="마지막 페이지로 이동">&gt;</button>
