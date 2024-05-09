@@ -1,6 +1,6 @@
 export const generateData = (length = 40) => {
   const titles = ["공지사항", "FAQ", "Q&A", "뉴스", "소개"];
-  const authors = ["최은광", "블루월넛", "홍길동", "김철수", "이영희"];
+  const authors = ["박민", "최은광", "블루월넛", "홍길동", "김철수", "이영희"];
 
   const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -27,6 +27,16 @@ export const generateData = (length = 40) => {
 export const initializeTable = (articles) => {
   const tableBody = document.querySelector("#tableBody");
   const isEmptyArticle = !articles || !articles.length;
+  const maskString = (input) => {
+    const string = input ?? "";
+    const { length } = string;
+
+    if (length <= 2) {
+      return `${length === 2 ? string.charAt(0) : ""}*`;
+    }
+
+    return `${string.charAt(0)}${"*".repeat(Math.max(0, length - 2))}${length > 1 ? string.charAt(length - 1) : ""}`;
+  };
 
   renderHTMl(tableBody, () => {
     return isEmptyArticle
@@ -40,7 +50,7 @@ export const initializeTable = (articles) => {
 					<div role="row">
 						<div data-column="index" role="cell">${article.index}</div>
 						<div data-column="title" role="cell"><a href="/board/write/?id=${article.id}">${article.title}</a></div>
-						<div data-column="author" role="cell">${article.author}</div>
+						<div data-column="author" role="cell">${maskString(article.author)}</div>
 						<div data-column="date" role="cell">${article.date}</div>
 						<div data-column="views" role="cell">${article.views}</div>
 					</div>
