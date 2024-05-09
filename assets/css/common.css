@@ -1,0 +1,49 @@
+.select {
+  min-width: 120px;
+  padding: 4px 12px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.button,
+.button-default,
+.button-primary {
+  display: inline-block;
+  min-width: 50px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.button-default {
+  background-color: #ccc;
+}
+
+.button-primary {
+  background-color: #116ae4;
+  color: #fff;
+}
+
+/* layout */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 1000px;
+  height: 100vh;
+  margin: auto;
+  padding: 5vh 5vw;
+}
+
+.header {
+  display: flex;
+  justify-content: end;
+  gap: 4px;
+}
+
+.footer {
+  display: flex;
+  justify-content: end;
+}

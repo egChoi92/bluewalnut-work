@@ -1,0 +1,64 @@
+[role="table"] {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-top: 2px solid #000;
+}
+
+[role="row"] {
+  display: flex;
+  border-bottom: 1px solid #aaa;
+  text-align: center;
+}
+
+[role="columnheader"] {
+  padding: 8px;
+  border-right: 1px solid #aaa;
+  background-color: #ccc;
+  font-weight: 700;
+}
+
+[role="columnheader"]:first-of-type {
+  border-left: 1px solid #aaa;
+}
+
+[role="cell"] {
+  padding: 8px;
+  border-right: 1px solid #ccc;
+}
+
+[role="cell"]:first-of-type {
+  border-left: 1px solid #ccc;
+}
+[data-column="index"] {
+  flex: 0.1;
+}
+[data-column="title"] {
+  flex: 0.5;
+}
+[data-column="author"] {
+  flex: 0.1;
+}
+[data-column="date"] {
+  flex: 0.2;
+}
+[data-column="views"] {
+  flex: 0.1;
+}
+
+.pagination-wrapper {
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+
+.pagination-button,
+.pagination-button-box {
+  min-width: 24px;
+  padding: 4px;
+  font-size: 10px;
+}
+
+.pagination-button-box {
+  border: 1px solid #ccc;
+}
