@@ -3,11 +3,12 @@
   flex-direction: column;
   width: 100%;
   border-top: 2px solid #000;
+  border-bottom: 1px solid #aaa;
 }
 
 [role="row"] {
   display: flex;
-  border-bottom: 1px solid #aaa;
+  border-top: 1px solid #aaa;
   text-align: center;
 }
 
@@ -45,6 +46,15 @@
 }
 [data-column="views"] {
   flex: 0.1;
+}
+
+#table {
+  overflow: auto;
+}
+
+#tableHead {
+  position: sticky;
+  top: 0;
 }
 
 .pagination-wrapper {
