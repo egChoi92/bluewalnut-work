@@ -13,11 +13,17 @@ export const renderHTMl = (container, callbackFunction) => {
 
 export const removeExtraSpacesBeforeTags = (template) => template.replace(/\s+\</g, "<").trim();
 
-export const redirectToUpdatedUrl = (key, value) => {
+export const getUrlObjectUpdatedParams = (params) => {
   const urlObject = new URL(window.location.href);
-  urlObject.searchParams.set(key, value);
+  params.map(({ key, value }) => urlObject.searchParams.set(key, value));
 
-  window.location.href = urlObject.href;
+  return urlObject;
+};
+
+export const redirectToUpdatedUrl = (params) => {
+  const urlObject = getUrlObjectUpdatedParams(params);
+
+  return (window.location.href = urlObject.href);
 };
 
 export const getCurrentUrlParams = () => new URLSearchParams(window.location.search);

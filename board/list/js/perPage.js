@@ -15,6 +15,11 @@ export const initializePerPage = (data) => {
   });
 
   perPageSelector.addEventListener("change", function (event) {
-    redirectToUpdatedUrl(Keys.PER_PAGE, event.target.value);
+    const params = [
+      { key: Keys.PER_PAGE, value: event.target.value },
+      { key: Keys.PAGINATION, value: 1 },
+    ];
+
+    return redirectToUpdatedUrl(params);
   });
 };
