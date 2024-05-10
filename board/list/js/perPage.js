@@ -1,7 +1,7 @@
+import { perPageList } from "/assets/js/constant.js";
+
 export const initializePerPage = (data) => {
   const perPageSelector = document.querySelector("#perPageSelector");
-  const perPageList = ["10", "20", "30", "40", "50"];
-
   const perPage = getQueryParamValue("perPage");
 
   renderHTMl(perPageSelector, () => {

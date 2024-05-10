@@ -1,3 +1,5 @@
+import { perPageList } from "/assets/js/constant.js";
+
 export const generateData = (length = 40) => {
   const titles = ["공지사항", "FAQ", "Q&A", "뉴스", "소개"];
   const authors = ["박민", "최은광", "블루월넛", "홍길동", "김철수", "이영희"];
@@ -37,7 +39,7 @@ const maskString = (input) => {
 
 export const initializeTable = (articles) => {
   const tableBody = document.querySelector("#tableBody");
-  const perPage = getQueryParamValue("perPage");
+  const perPage = getQueryParamValue("perPage") ?? perPageList[0];
   const isEmptyArticle = !articles || !articles.length;
 
   renderHTMl(tableBody, () => {
