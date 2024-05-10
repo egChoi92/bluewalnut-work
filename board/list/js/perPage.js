@@ -6,12 +6,16 @@ export const initializePerPage = (data) => {
   const perPage = getQueryParamValue(Keys.PER_PAGE);
 
   renderHTMl(perPageSelector, () => {
-    return perPageList.map((value) => {
-      const isSelect = value === perPage;
-      return removeExtraSpacesBeforeTags(`
-          <option value="${value}" ${isSelect ? "selected" : ""} aria-label="항목 ${value}개씩 보기" >${value}개씩 보기</option>
-				`);
-    });
+    const optionTemplate = perPageList
+      .map((value) => {
+        const isSelect = value === perPage;
+        const selected = isSelect ? "selected" : "";
+
+        return `<option value="${value}" ${selected} aria-label="항목 ${value}개씩 보기" >${value}개씩 보기</option>`;
+      })
+      .join(" ");
+
+    return removeExtraSpacesBeforeTags(optionTemplate);
   });
 
   perPageSelector.addEventListener("change", function (event) {

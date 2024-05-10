@@ -7,7 +7,9 @@ export const hasSessionStorage = (key) => sessionStorage.getItem(key) !== null;
 export const renderHTMl = (container, callbackFunction) => {
   if (!container) throw new Error("선택자와 일치하는 요소를 찾을 수 없습니다.");
 
-  const template = typeof callbackFunction() === "object" ? callbackFunction().join("") : callbackFunction();
+  const template = callbackFunction();
+  if (typeof template !== "string") throw new Error("렌더링 함수의 return 타입이 문자열이 아닙니다.");
+
   container.insertAdjacentHTML("beforeend", template);
 };
 

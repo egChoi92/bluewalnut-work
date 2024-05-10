@@ -53,17 +53,21 @@ export const initializeTable = (articles) => {
     } else {
       const slicedArticles = articles.slice(0, Math.min(perPage, articles.length));
 
-      return slicedArticles.map((article) =>
-        removeExtraSpacesBeforeTags(`
-          <div role="row">
-            <div data-column="index" role="cell">${article.index}</div>
-            <div data-column="title" role="cell"><a href="/board/write/?id=${article.id}">${article.title}</a></div>
-            <div data-column="author" role="cell">${maskString(article.author)}</div>
-            <div data-column="date" role="cell">${article.date}</div>
-            <div data-column="views" role="cell">${article.views}</div>
-          </div>
-        `)
-      );
+      const articlesTemplate = slicedArticles
+        .map(
+          (article) => `
+            <div role="row">
+              <div data-column="index" role="cell">${article.index}</div>
+              <div data-column="title" role="cell"><a href="/board/write/?id=${article.id}">${article.title}</a></div>
+              <div data-column="author" role="cell">${maskString(article.author)}</div>
+              <div data-column="date" role="cell">${article.date}</div>
+              <div data-column="views" role="cell">${article.views}</div>
+            </div>
+          `
+        )
+        .join(" ");
+
+      return removeExtraSpacesBeforeTags(articlesTemplate);
     }
   });
 };
