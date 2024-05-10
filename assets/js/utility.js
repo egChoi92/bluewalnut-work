@@ -16,11 +16,12 @@ export const removeExtraSpacesBeforeTags = (template) => template.replace(/\s+\<
 export const redirectToUpdatedUrl = (key, value) => {
   const urlObject = new URL(window.location.href);
   urlObject.searchParams.set(key, value);
+
   window.location.href = urlObject.href;
 };
 
-export const getQueryParamValue = (key) => {
-  const urlParams = new URLSearchParams(window.location.search);
+export const getCurrentUrlParams = () => new URLSearchParams(window.location.search);
 
-  return urlParams.get(key);
-};
+export const getQueryParamValue = (key) => getCurrentUrlParams().get(key);
+
+export const hasQueryParam = (key) => getCurrentUrlParams().has(key);

@@ -1,4 +1,3 @@
-import { perPageList } from "/assets/js/constant.js";
 import { getQueryParamValue, hasSessionStorage, removeExtraSpacesBeforeTags, renderHTMl, setSessionStorage } from "/assets/js/utility.js";
 
 export const generateData = (length = 40) => {
@@ -40,7 +39,7 @@ const maskString = (input) => {
 
 export const initializeTable = (articles) => {
   const tableBody = document.querySelector("#tableBody");
-  const perPage = getQueryParamValue("perPage") ?? perPageList[0];
+  const perPage = getQueryParamValue("perPage");
   const isEmptyArticle = !articles || !articles.length;
 
   renderHTMl(tableBody, () => {
@@ -52,6 +51,7 @@ export const initializeTable = (articles) => {
 		`);
     } else {
       const slicedArticles = articles.slice(0, Math.min(perPage, articles.length));
+
       return slicedArticles.map((article) => {
         return removeExtraSpacesBeforeTags(`
         <div role="row">
