@@ -1,9 +1,9 @@
-import { perPageList } from "/assets/js/constant.js";
+import { Keys, perPageList } from "/assets/js/constant.js";
 import { getQueryParamValue, redirectToUpdatedUrl, removeExtraSpacesBeforeTags, renderHTMl } from "/assets/js/utility.js";
 
 export const initializePerPage = (data) => {
   const perPageSelector = document.querySelector("#perPageSelector");
-  const perPage = getQueryParamValue("perPage");
+  const perPage = getQueryParamValue(Keys.PER_PAGE);
 
   renderHTMl(perPageSelector, () => {
     return perPageList.map((value) => {
@@ -15,6 +15,6 @@ export const initializePerPage = (data) => {
   });
 
   perPageSelector.addEventListener("change", function (event) {
-    redirectToUpdatedUrl("perPage", event.target.value);
+    redirectToUpdatedUrl(Keys.PER_PAGE, event.target.value);
   });
 };

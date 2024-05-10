@@ -1,3 +1,4 @@
+import { Keys } from "/assets/js/constant.js";
 import { getQueryParamValue, hasSessionStorage, removeExtraSpacesBeforeTags, renderHTMl, setSessionStorage } from "/assets/js/utility.js";
 
 export const generateData = (length = 40) => {
@@ -21,8 +22,8 @@ export const generateData = (length = 40) => {
     views: getRandomInt(0, 500),
   }));
 
-  if (!hasSessionStorage("articles")) {
-    setSessionStorage("articles", articles);
+  if (!hasSessionStorage(Keys.ARTICLES)) {
+    setSessionStorage(Keys.ARTICLES, articles);
   }
 };
 
@@ -39,7 +40,7 @@ const maskString = (input) => {
 
 export const initializeTable = (articles) => {
   const tableBody = document.querySelector("#tableBody");
-  const perPage = getQueryParamValue("perPage");
+  const perPage = getQueryParamValue(Keys.PER_PAGE);
   const isEmptyArticle = !articles || !articles.length;
 
   renderHTMl(tableBody, () => {
@@ -52,17 +53,17 @@ export const initializeTable = (articles) => {
     } else {
       const slicedArticles = articles.slice(0, Math.min(perPage, articles.length));
 
-      return slicedArticles.map((article) => {
-        return removeExtraSpacesBeforeTags(`
-        <div role="row">
-          <div data-column="index" role="cell">${article.index}</div>
-          <div data-column="title" role="cell"><a href="/board/write/?id=${article.id}">${article.title}</a></div>
-          <div data-column="author" role="cell">${maskString(article.author)}</div>
-          <div data-column="date" role="cell">${article.date}</div>
-          <div data-column="views" role="cell">${article.views}</div>
-        </div>
-      `);
-      });
+      return slicedArticles.map((article) =>
+        removeExtraSpacesBeforeTags(`
+          <div role="row">
+            <div data-column="index" role="cell">${article.index}</div>
+            <div data-column="title" role="cell"><a href="/board/write/?id=${article.id}">${article.title}</a></div>
+            <div data-column="author" role="cell">${maskString(article.author)}</div>
+            <div data-column="date" role="cell">${article.date}</div>
+            <div data-column="views" role="cell">${article.views}</div>
+          </div>
+        `)
+      );
     }
   });
 };
