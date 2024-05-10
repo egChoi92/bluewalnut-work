@@ -1,4 +1,5 @@
 import { perPageList } from "/assets/js/constant.js";
+import { getQueryParamValue, redirectToUpdatedUrl, removeExtraSpacesBeforeTags, renderHTMl } from "/assets/js/utility.js";
 
 export const initializePerPage = (data) => {
   const perPageSelector = document.querySelector("#perPageSelector");

@@ -1,4 +1,5 @@
 import { perPageList } from "/assets/js/constant.js";
+import { getQueryParamValue, hasSessionStorage, removeExtraSpacesBeforeTags, renderHTMl, setSessionStorage } from "/assets/js/utility.js";
 
 export const generateData = (length = 40) => {
   const titles = ["공지사항", "FAQ", "Q&A", "뉴스", "소개"];
