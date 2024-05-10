@@ -57,7 +57,7 @@
   top: 0;
 }
 
-.pagination-wrapper {
+#pagination {
   display: flex;
   align-items: center;
   margin: auto;
@@ -65,9 +65,24 @@
 
 .pagination-button,
 .pagination-button-box {
-  min-width: 24px;
-  padding: 4px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 2px;
+  margin: 0 2px;
   font-size: 10px;
+  text-align: center;
+}
+
+.pagination-button[aria-current="page"] {
+  border: 1px solid #666;
+}
+
+.pagination-button:hover,
+.pagination-button-box:hover {
+  text-decoration: underline;
 }
 
 .pagination-button-box {

@@ -41,6 +41,7 @@ const maskString = (input) => {
 export const initializeTable = (articles) => {
   const tableBody = document.querySelector("#tableBody");
   const perPage = getQueryParamValue(Keys.PER_PAGE);
+  const pagination = getQueryParamValue(Keys.PAGINATION);
   const isEmptyArticle = !articles || !articles.length;
 
   renderHTMl(tableBody, () => {
@@ -51,9 +52,13 @@ export const initializeTable = (articles) => {
 			</div>
 		`);
     } else {
-      const slicedArticles = articles.slice(0, Math.min(perPage, articles.length));
-
-      const articlesTemplate = slicedArticles
+      const splittedArticles = articles.reduce((result, value, index) => {
+        if (index % perPage === 0) result.push([]);
+        result[result.length - 1].push(value);
+        return result;
+      }, []);
+      const articlesIndex = pagination - 1;
+      const articlesTemplate = splittedArticles[articlesIndex]
         .map(
           (article) => `
             <div role="row">

@@ -1,3 +1,4 @@
+import { initializePagination } from "./js/pagination.js";
 import { initializePerPage } from "./js/perPage.js";
 import { generateData, initializeTable } from "./js/table.js";
 import { Keys, perPageList } from "/assets/js/constant.js";
@@ -16,4 +17,5 @@ document.addEventListener("DOMContentLoaded", function () {
   generateData(40);
   initializePerPage();
   initializeTable(getSessionStorage(Keys.ARTICLES));
+  initializePagination();
 });
