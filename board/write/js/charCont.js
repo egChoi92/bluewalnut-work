@@ -5,13 +5,13 @@ const getStringByteSize = (string) => {
   return encoded.length;
 };
 
-export const initializeCharCount = (editor) => {
-  const charCount = document.querySelector("#charCount");
+export const setupCharacterCounter = (editor) => {
+  const charCountElement = document.querySelector("#charCount");
 
   editor.on("change", function (event) {
     const markdown = editor.getMarkdown();
     const size = getStringByteSize(markdown);
 
-    charCount.textContent = size;
+    charCountElement.textContent = size;
   });
 };

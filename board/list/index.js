@@ -1,11 +1,11 @@
 import { initializeArticles } from "./js/articles.js";
-import { initializePagination } from "./js/pagination.js";
-import { initializePerPage } from "./js/perPage.js";
-import { initializeTable } from "./js/table.js";
+import { renderPagination } from "./js/pagination.js";
+import { renderPerPage } from "./js/perPage.js";
+import { renderTable } from "./js/table.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   const articles = initializeArticles();
-  initializeTable(articles);
-  initializePagination(articles.length);
-  initializePerPage();
+  renderTable(articles);
+  renderPagination(articles.length);
+  renderPerPage();
 });

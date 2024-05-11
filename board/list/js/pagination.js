@@ -1,10 +1,10 @@
 import { KEY_LIST } from "/assets/js/constant.js";
 import { getQueryParamValue, getUrlObjectUpdatedParams, removeExtraSpacesBeforeTags, renderHTMl } from "/assets/js/utility.js";
 
-export const initializePagination = (articlesLength) => {
-  const perPage = getQueryParamValue("perPage");
+export const renderPagination = (articlesLength) => {
+  const perPage = getQueryParamValue(KEY_LIST.PER_PAGE);
   const length = Math.ceil(articlesLength / perPage);
-  const pagination = document.querySelector("#pagination");
+  const paginationElement = document.querySelector("#pagination");
 
   const generateFirstLastButtonTemplate = (value, label, text) => {
     const urlObject = getUrlObjectUpdatedParams([{ key: KEY_LIST.PAGINATION, value }]);
@@ -14,7 +14,7 @@ export const initializePagination = (articlesLength) => {
       `;
   };
 
-  renderHTMl(pagination, () => {
+  renderHTMl(paginationElement, () => {
     const paginationButtonTemplate = Array.from({ length }, (_, index) => {
       const pageIndex = index + 1;
       const urlObject = getUrlObjectUpdatedParams([{ key: KEY_LIST.PAGINATION, value: pageIndex }]);

@@ -12,25 +12,26 @@ const maskString = (input) => {
   return `${string.charAt(0)}${"*".repeat(Math.max(0, length - 2))}${length > 1 ? string.charAt(length - 1) : ""}`;
 };
 
-export const initializeTable = (articles) => {
-  const tableBody = document.querySelector("#tableBody");
+export const renderTable = (articles) => {
+  const tableBodyElement = document.querySelector("#tableBody");
   const perPage = getQueryParamValue(KEY_LIST.PER_PAGE);
   const pagination = getQueryParamValue(KEY_LIST.PAGINATION);
   const isEmptyArticle = !articles || !articles.length;
 
-  renderHTMl(tableBody, () => {
+  renderHTMl(tableBodyElement, () => {
     if (isEmptyArticle) {
       return removeExtraSpacesBeforeTags(`
-			<div role="row">
-				<div role="cell">등록된 글이 없습니다.</div>
-			</div>
-		`);
+        <div role="row">
+          <div role="cell">등록된 글이 없습니다.</div>
+        </div>
+      `);
     } else {
       const splittedArticles = articles.reduce((result, value, index) => {
         if (index % perPage === 0) result.push([]);
         result[result.length - 1].push(value);
         return result;
       }, []);
+
       const articlesIndex = pagination - 1;
       const articlesTemplate = splittedArticles[articlesIndex]
         .map(
