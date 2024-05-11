@@ -1,4 +1,4 @@
-import { Keys } from "/assets/js/constant.js";
+import { KEY_LIST } from "/assets/js/constant.js";
 import { hasSessionStorage, setSessionStorage } from "/assets/js/utility.js";
 
 const titles = ["공지사항", "FAQ", "Q&A", "뉴스", "소개"];
@@ -35,7 +35,7 @@ export const generateData = (length = 40) => {
     };
   });
 
-  if (!hasSessionStorage(Keys.ARTICLES)) {
-    setSessionStorage(Keys.ARTICLES, articles);
+  if (!hasSessionStorage(KEY_LIST.ARTICLES)) {
+    setSessionStorage(KEY_LIST.ARTICLES, articles);
   }
 };

@@ -1,14 +1,14 @@
-import { Keys } from "/assets/js/constant.js";
+import { KEY_LIST } from "/assets/js/constant.js";
 import { getQueryParamValue, getSessionStorage, getUrlObjectUpdatedParams, removeExtraSpacesBeforeTags, renderHTMl } from "/assets/js/utility.js";
 
 export const initializePagination = () => {
   const perPage = getQueryParamValue("perPage");
-  const articlesLength = getSessionStorage(Keys.ARTICLES).length;
+  const articlesLength = getSessionStorage(KEY_LIST.ARTICLES).length;
   const length = Math.ceil(articlesLength / perPage);
   const pagination = document.querySelector("#pagination");
 
   const generateFirstLastButtonTemplate = (value, label, text) => {
-    const urlObject = getUrlObjectUpdatedParams([{ key: Keys.PAGINATION, value }]);
+    const urlObject = getUrlObjectUpdatedParams([{ key: KEY_LIST.PAGINATION, value }]);
 
     return `
         <a href="${urlObject.href}" class="pagination-button-box" aria-label="${label} 페이지로 이동">${text}</a>
@@ -18,7 +18,7 @@ export const initializePagination = () => {
   renderHTMl(pagination, () => {
     const paginationButtonTemplate = Array.from({ length }, (_, index) => {
       const pageIndex = index + 1;
-      const urlObject = getUrlObjectUpdatedParams([{ key: Keys.PAGINATION, value: pageIndex }]);
+      const urlObject = getUrlObjectUpdatedParams([{ key: KEY_LIST.PAGINATION, value: pageIndex }]);
       const isCurrentPage = urlObject.href === window.location.href;
       const ariaCurrentPage = isCurrentPage ? 'aria-current="page"' : "";
 

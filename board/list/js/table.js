@@ -1,4 +1,4 @@
-import { Keys } from "/assets/js/constant.js";
+import { KEY_LIST } from "/assets/js/constant.js";
 import { getQueryParamValue, removeExtraSpacesBeforeTags, renderHTMl } from "/assets/js/utility.js";
 
 const maskString = (input) => {
@@ -14,8 +14,8 @@ const maskString = (input) => {
 
 export const initializeTable = (articles) => {
   const tableBody = document.querySelector("#tableBody");
-  const perPage = getQueryParamValue(Keys.PER_PAGE);
-  const pagination = getQueryParamValue(Keys.PAGINATION);
+  const perPage = getQueryParamValue(KEY_LIST.PER_PAGE);
+  const pagination = getQueryParamValue(KEY_LIST.PAGINATION);
   const isEmptyArticle = !articles || !articles.length;
 
   renderHTMl(tableBody, () => {

@@ -1,5 +1,5 @@
 import { getEditor } from "./editor.js";
-import { Keys } from "/assets/js/constant.js";
+import { KEY_LIST } from "/assets/js/constant.js";
 import { generateAuthor, generateTitle } from "/assets/js/data.js";
 import { getSessionStorage, setSessionStorage } from "/assets/js/utility.js";
 
@@ -7,7 +7,7 @@ export const initializePost = () => {
   const editor = getEditor();
   const markdown = editor.getMarkdown();
 
-  const articles = getSessionStorage(Keys.ARTICLES, "[]");
+  const articles = getSessionStorage(KEY_LIST.ARTICLES, "[]");
   const newArticle = {
     id: crypto.randomUUID(),
     index: articles.length + 1,
@@ -19,6 +19,6 @@ export const initializePost = () => {
   };
   const updateArticles = [...articles, newArticle];
 
-  setSessionStorage(Keys.ARTICLES, updateArticles);
+  setSessionStorage(KEY_LIST.ARTICLES, updateArticles);
   window.location.href = "/board/list";
 };
