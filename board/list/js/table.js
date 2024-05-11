@@ -1,31 +1,5 @@
 import { Keys } from "/assets/js/constant.js";
-import { getQueryParamValue, hasSessionStorage, removeExtraSpacesBeforeTags, renderHTMl, setSessionStorage } from "/assets/js/utility.js";
-
-export const generateData = (length = 40) => {
-  const titles = ["공지사항", "FAQ", "Q&A", "뉴스", "소개"];
-  const authors = ["박민", "최은광", "블루월넛", "홍길동", "김철수", "이영희"];
-
-  const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-
-  const getRandomDate = () => {
-    const start = new Date(2023, 0, 1);
-    const end = new Date(2024, 11, 31);
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toISOString().split("T")[0];
-  };
-
-  const articles = Array.from({ length }, (_, index) => ({
-    id: crypto.randomUUID(),
-    index: index + 1,
-    title: `${titles[getRandomInt(0, titles.length - 1)]} 게시글의 제목입니다.`,
-    author: authors[getRandomInt(0, authors.length - 1)],
-    date: getRandomDate(),
-    views: getRandomInt(0, 500),
-  }));
-
-  if (!hasSessionStorage(Keys.ARTICLES)) {
-    setSessionStorage(Keys.ARTICLES, articles);
-  }
-};
+import { getQueryParamValue, removeExtraSpacesBeforeTags, renderHTMl } from "/assets/js/utility.js";
 
 const maskString = (input) => {
   const string = input ?? "";

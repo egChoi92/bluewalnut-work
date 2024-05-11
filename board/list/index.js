@@ -1,7 +1,8 @@
 import { initializePagination } from "./js/pagination.js";
 import { initializePerPage } from "./js/perPage.js";
-import { generateData, initializeTable } from "./js/table.js";
+import { initializeTable } from "./js/table.js";
 import { Keys, perPageList } from "/assets/js/constant.js";
+import { generateData } from "/assets/js/data.js";
 import { getSessionStorage, hasQueryParam, redirectToUpdatedUrl } from "/assets/js/utility.js";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -15,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   generateData(40);
-  initializePerPage();
   initializeTable(getSessionStorage(Keys.ARTICLES));
+  initializePerPage();
   initializePagination();
 });

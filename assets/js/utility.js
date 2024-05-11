@@ -1,6 +1,6 @@
 export const setSessionStorage = (key, value) => sessionStorage.setItem(key, JSON.stringify(value));
 
-export const getSessionStorage = (key) => JSON.parse(sessionStorage.getItem(key));
+export const getSessionStorage = (key, exceptionString) => JSON.parse(sessionStorage.getItem(key) ?? exceptionString);
 
 export const hasSessionStorage = (key) => sessionStorage.getItem(key) !== null;
 
