@@ -1,2 +1,3 @@
-@import url(./reset.css);
-@import url(./common.css);
+@import url("./modules/reset.css");
+@import url("./modules/layout.css");
+@import url("./modules/ui.css");

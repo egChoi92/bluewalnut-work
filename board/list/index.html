@@ -6,7 +6,7 @@
     <title>조회 화면</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-gov.min.css" />
     <link rel="stylesheet" href="/assets/css/index.css" />
-    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./css/index.css" />
     <script type="text/javascript" src="/assets/js/babel.min.js"></script>
     <script type="text/javascript" src="/assets/js/polyfill.min.js"></script>
   </head>
@@ -16,8 +16,8 @@
         <select class="select" id="perPageSelector" aria-controls="table" aria-label="게시판에서 표시할 항목 수 선택"></select>
       </header>
 
-      <div id="table" role="table" aria-label="게시판 테이블" aria-describedby="perPageSelector">
-        <div id="tableHead" role="rowgroup" aria-label="테이블 헤더">
+      <div id="table" class="table" role="table" aria-label="게시판 테이블" aria-describedby="perPageSelector">
+        <div id="tableHead" class="table-head" role="rowgroup" aria-label="테이블 헤더">
           <div role="row" aria-label="헤더 행">
             <div data-column="index" role="columnheader" aria-label="순번">순번</div>
             <div data-column="title" role="columnheader" aria-label="제목">제목</div>
@@ -30,10 +30,10 @@
       </div>
 
       <footer class="footer">
-        <nav id="pagination" aria-live="polite" aria-label="페이지 네비게이션"></nav>
+        <nav id="pagination" class="pagination" aria-live="polite" aria-label="페이지 네비게이션"></nav>
         <a href="/board/write/" class="button-primary"> 회원 글쓰기 </a>
       </footer>
     </main>
-    <script type="module" src="./index.js"></script>
+    <script type="module" src="./js/index.js"></script>
   </body>
 </html>

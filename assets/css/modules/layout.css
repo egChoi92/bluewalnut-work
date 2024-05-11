@@ -1,0 +1,17 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 1000px;
+  height: 100vh;
+  margin: auto;
+  padding: 5vh 5vw;
+}
+
+.header,
+.footer {
+  display: flex;
+  justify-content: end;
+  gap: 4px;
+}

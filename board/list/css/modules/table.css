@@ -48,43 +48,11 @@
   flex: 0.1;
 }
 
-#table {
+.table {
   overflow: auto;
 }
 
-#tableHead {
+.table-head {
   position: sticky;
   top: 0;
-}
-
-#pagination {
-  display: flex;
-  align-items: center;
-  margin: auto;
-}
-
-.pagination-button,
-.pagination-button-box {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 20px;
-  height: 20px;
-  padding: 2px;
-  margin: 0 2px;
-  font-size: 10px;
-  text-align: center;
-}
-
-.pagination-button[aria-current="page"] {
-  border: 1px solid #666;
-}
-
-.pagination-button:hover,
-.pagination-button-box:hover {
-  text-decoration: underline;
-}
-
-.pagination-button-box {
-  border: 1px solid #ccc;
 }
