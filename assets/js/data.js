@@ -1,11 +1,10 @@
 import { KEY_LIST } from "/assets/js/constant.js";
-import { hasSessionStorage, setSessionStorage } from "/assets/js/utility.js";
+import { setSessionStorage } from "/assets/js/utility.js";
 
 const titles = ["공지사항", "FAQ", "Q&A", "뉴스", "소개"];
 const authors = ["박민", "최은광", "블루월넛", "홍길동", "김철수", "이영희"];
 
 const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-
 const getRandomDate = () => {
   const start = new Date(2023, 0, 1);
   const end = new Date(2024, 11, 31);
@@ -35,7 +34,5 @@ export const generateData = (length = 40) => {
     };
   });
 
-  if (!hasSessionStorage(KEY_LIST.ARTICLES)) {
-    setSessionStorage(KEY_LIST.ARTICLES, articles);
-  }
+  setSessionStorage(KEY_LIST.ARTICLES, articles);
 };

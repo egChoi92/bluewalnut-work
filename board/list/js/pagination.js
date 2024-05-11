@@ -1,9 +1,8 @@
 import { KEY_LIST } from "/assets/js/constant.js";
-import { getQueryParamValue, getSessionStorage, getUrlObjectUpdatedParams, removeExtraSpacesBeforeTags, renderHTMl } from "/assets/js/utility.js";
+import { getQueryParamValue, getUrlObjectUpdatedParams, removeExtraSpacesBeforeTags, renderHTMl } from "/assets/js/utility.js";
 
-export const initializePagination = () => {
+export const initializePagination = (articlesLength) => {
   const perPage = getQueryParamValue("perPage");
-  const articlesLength = getSessionStorage(KEY_LIST.ARTICLES).length;
   const length = Math.ceil(articlesLength / perPage);
   const pagination = document.querySelector("#pagination");
 
