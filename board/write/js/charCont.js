@@ -1,5 +1,3 @@
-import { getEditor } from "./editor.js";
-
 const getStringByteSize = (string) => {
   const encoder = new TextEncoder();
   const encoded = encoder.encode(string);
@@ -7,8 +5,7 @@ const getStringByteSize = (string) => {
   return encoded.length;
 };
 
-export const initializeCharCount = () => {
-  const editor = getEditor();
+export const initializeCharCount = (editor) => {
   const charCount = document.querySelector("#charCount");
 
   editor.on("change", function (event) {
