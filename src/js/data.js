@@ -1,5 +1,5 @@
-import { KEY_LIST } from "/assets/js/constant.js";
-import { setSessionStorage } from "/assets/js/utility.js";
+import { ARTICLES_KEY, PER_PAGE_LIST } from "/src/js/constant.js";
+import { setSessionStorage } from "/src/js/storage.js";
 
 const titles = ["공지사항", "FAQ", "Q&A", "뉴스", "소개"];
 const authors = ["박민", "최은광", "블루월넛", "홍길동", "김철수", "이영희"];
@@ -17,7 +17,7 @@ export const generateTitle = () => titles[getRandomInt(0, titles.length - 1)];
 export const generateAuthor = () => authors[getRandomInt(0, authors.length - 1)];
 
 export const generateData = (length = 40) => {
-  const articles = Array.from({ length }, (_, index) => {
+  const articlesData = Array.from({ length }, (_, index) => {
     const articleIndex = index + 1;
     const articleTitle = generateTitle();
     const articleAuthor = generateAuthor();
@@ -34,5 +34,12 @@ export const generateData = (length = 40) => {
     };
   });
 
-  setSessionStorage(KEY_LIST.ARTICLES, articles);
+  const articles = {
+    [ARTICLES_KEY.DATA]: articlesData,
+    [ARTICLES_KEY.LENGTH]: articlesData.length,
+    [ARTICLES_KEY.PER_PAGE]: PER_PAGE_LIST[0],
+    [ARTICLES_KEY.PAGINATION]: 1,
+  };
+
+  setSessionStorage(ARTICLES_KEY.ARTICLES, articles);
 };

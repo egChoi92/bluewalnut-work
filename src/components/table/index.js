@@ -1,5 +1,6 @@
-import { KEY_LIST } from "/assets/js/constant.js";
-import { getQueryParamValue, removeExtraSpacesBeforeTags, renderHTMl } from "/assets/js/utility.js";
+import { ARTICLES_KEY } from "/src/js/constant.js";
+import { renderTemplateLiteralToHtml } from "/src/js/htmlRenderer.js";
+import { getSessionStorage } from "/src/js/storage.js";
 
 const maskString = (input) => {
   const string = input ?? "";
@@ -12,28 +13,28 @@ const maskString = (input) => {
   return `${string.charAt(0)}${"*".repeat(Math.max(0, length - 2))}${length > 1 ? string.charAt(length - 1) : ""}`;
 };
 
-export const renderTable = (articles) => {
-  const tableBodyElement = document.querySelector("#tableBody");
-  const perPage = getQueryParamValue(KEY_LIST.PER_PAGE);
-  const pagination = getQueryParamValue(KEY_LIST.PAGINATION);
-  const isEmptyArticle = !articles || !articles.length;
+const selector = "#tableBody";
+const { articlesData, articlesPerPage, articlesPagination } = getSessionStorage(ARTICLES_KEY.ARTICLES);
 
-  renderHTMl(tableBodyElement, () => {
+(() => {
+  const isEmptyArticle = !articlesData || !articlesData.length;
+
+  renderTemplateLiteralToHtml(selector, () => {
     if (isEmptyArticle) {
-      return removeExtraSpacesBeforeTags(`
+      return `
         <div role="row">
           <div role="cell">등록된 글이 없습니다.</div>
         </div>
-      `);
+      `;
     } else {
-      const splittedArticles = articles.reduce((result, value, index) => {
-        if (index % perPage === 0) result.push([]);
+      const splittedData = articlesData.reduce((result, value, index) => {
+        if (index % articlesPerPage === 0) result.push([]);
         result[result.length - 1].push(value);
         return result;
       }, []);
 
-      const articlesIndex = pagination - 1;
-      const articlesTemplate = splittedArticles[articlesIndex]
+      const articlesIndex = articlesPagination - 1;
+      const articlesTemplateLiteral = splittedData[articlesIndex]
         .map(
           (article) => `
             <div role="row">
@@ -47,7 +48,7 @@ export const renderTable = (articles) => {
         )
         .join(" ");
 
-      return removeExtraSpacesBeforeTags(articlesTemplate);
+      return articlesTemplateLiteral;
     }
   });
-};
+})();

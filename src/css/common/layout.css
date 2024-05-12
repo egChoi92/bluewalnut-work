@@ -15,3 +15,7 @@
   justify-content: end;
   gap: 4px;
 }
+
+.table-container {
+  overflow: hidden;
+}

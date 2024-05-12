@@ -1,6 +1,7 @@
 import { KEY_LIST } from "/assets/js/constant.js";
 import { generateAuthor, generateTitle } from "/assets/js/data.js";
-import { getQueryParamValue, getSessionStorage, setSessionStorage } from "/assets/js/utility.js";
+import { getQueryParamValue } from "/assets/js/urlUtils.js";
+import { getSessionStorage, setSessionStorage } from "/src/js/storage.js";
 
 const addNewArticle = (articles, content) => {
   const newArticle = {
