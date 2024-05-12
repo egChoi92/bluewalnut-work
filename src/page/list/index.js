@@ -4,7 +4,7 @@ import { appendChild, createButton, loadHtmlContent } from "/src/js/htmlRenderer
 import { navigateTo } from "/src/js/navigation.js";
 import { getSessionStorage, hasSessionStorage, removeSessionStorage } from "/src/js/storage.js";
 
-const initialize = () => {
+const initializeData = () => {
   if (!hasSessionStorage(ARTICLES_KEY.ARTICLES)) {
     generateData(40);
   }
@@ -12,14 +12,12 @@ const initialize = () => {
   return getSessionStorage(ARTICLES_KEY.ARTICLES);
 };
 
-const Selectors = {
-  HEADER: "#header",
-  TABLE_CONTAINER: "#tableContainer",
-  FOOTER: "#footer",
-};
-
-(async () => {
-  initialize();
+const renderDOM = async () => {
+  const Selectors = {
+    HEADER: "#header",
+    TABLE_CONTAINER: "#tableContainer",
+    FOOTER: "#footer",
+  };
 
   await loadHtmlContent(Selectors.HEADER, "/src/components/per-page");
   await loadHtmlContent(Selectors.TABLE_CONTAINER, "/src/components/table");
@@ -34,4 +32,9 @@ const Selectors = {
   };
   const WriteButton = createButton("button", "회원 글쓰기", "button-primary", clickWriteButton);
   appendChild(Selectors.FOOTER, WriteButton);
+};
+
+(() => {
+  initializeData();
+  renderDOM();
 })();

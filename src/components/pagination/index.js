@@ -3,12 +3,7 @@ import { renderTemplateLiteralToHtml } from "/src/js/htmlRenderer.js";
 import { navigateTo } from "/src/js/navigation.js";
 import { getSessionStorage, setSessionStorage } from "/src/js/storage.js";
 
-const selector = "#pagination";
-const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
-
-(() => {
-  const { articlesPerPage, articlesLength, articlesPagination } = storageArticles;
-  const length = Math.ceil(articlesLength / articlesPerPage);
+const initializePagination = (selector, length, pagination) => {
   const generateFirstLastButtonTemplate = (value, label, text) => {
     return `
        <button type="button" value=${value} class="pagination-button-box" aria-label="${label} 페이지로 이동" >${text}</button>
@@ -18,7 +13,7 @@ const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
   renderTemplateLiteralToHtml(selector, () => {
     const paginationButtonTemplate = Array.from({ length }, (_, index) => {
       const pageIndex = index + 1;
-      const isCurrentPage = articlesPagination === pageIndex;
+      const isCurrentPage = pagination === pageIndex;
       const ariaCurrentPage = isCurrentPage ? 'aria-current="page"' : "";
 
       return `
@@ -32,14 +27,16 @@ const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
       ${generateFirstLastButtonTemplate(length, "마지막", "&gt;")}
     `;
   });
+};
 
+const setPaginationButton = (articles) => {
   const paginationButtonElements = document.querySelectorAll(".pagination-button");
 
   paginationButtonElements.forEach((element) => {
     element.addEventListener("click", function (event) {
       const { value } = event.target;
       const updatedStorageArticles = {
-        ...storageArticles,
+        ...articles,
         [ARTICLES_KEY.PAGINATION]: Number(value),
       };
       setSessionStorage(ARTICLES_KEY.ARTICLES, updatedStorageArticles);
@@ -47,4 +44,14 @@ const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
       navigateTo(ROUTER_PATH.BOARD_LIST);
     });
   });
+};
+
+(() => {
+  const selector = "#pagination";
+  const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
+  const { articlesPerPage, articlesLength, articlesPagination } = storageArticles;
+  const length = Math.ceil(articlesLength / articlesPerPage);
+
+  initializePagination(selector, length, articlesPagination);
+  setPaginationButton(storageArticles);
 })();
