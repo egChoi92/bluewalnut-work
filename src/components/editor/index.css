@@ -1,3 +1,7 @@
+.editor {
+  height: 70vh;
+}
+
 .char-count-text {
   text-align: right;
 }

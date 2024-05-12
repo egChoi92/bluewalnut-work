@@ -43,3 +43,16 @@ export const generateData = (length = 40) => {
 
   setSessionStorage(ARTICLES_KEY.ARTICLES, articles);
 };
+
+export const replacer = (key, value) => {
+  const seen = new WeakSet();
+  return function (key, value) {
+    if (typeof value === "object" && value !== null) {
+      if (seen.has(value)) {
+        return;
+      }
+      seen.add(value);
+    }
+    return value;
+  };
+};

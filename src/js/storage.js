@@ -1,4 +1,4 @@
-export const setSessionStorage = (key, value) => sessionStorage.setItem(key, JSON.stringify(value));
+export const setSessionStorage = (key, value, replacer) => sessionStorage.setItem(key, JSON.stringify(value, replacer && replacer()));
 
 export const getSessionStorage = (key, exceptionString) => JSON.parse(sessionStorage.getItem(key) ?? exceptionString);
 
