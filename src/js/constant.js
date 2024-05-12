@@ -17,3 +17,7 @@ export const EDITOR_KEY = {
   EDITOR: "editor",
   ID: "editorId",
 };
+
+export const POST_MESSAGE = {
+  WRITE_SUBMIT: "writeSubmit",
+};

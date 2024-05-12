@@ -1,5 +1,7 @@
-import { ARTICLES_KEY, EDITOR_KEY } from "/src/js/constant.js";
-import { getSessionStorage } from "/src/js/storage.js";
+import { ARTICLES_KEY, EDITOR_KEY, POST_MESSAGE, ROUTER_PATH } from "/src/js/constant.js";
+import { generateAuthor, generateTitle } from "/src/js/data.js";
+import { navigateTo } from "/src/js/navigation.js";
+import { getSessionStorage, setSessionStorage } from "/src/js/storage.js";
 
 const setCharCounter = (editor) => {
   const charCountElement = document.querySelector("#charCount");
@@ -13,19 +15,16 @@ const setCharCounter = (editor) => {
   });
 };
 
-const setUpdateModeToEditor = (editor) => {
-  const editorId = getSessionStorage(EDITOR_KEY.ID, "null");
+const setUpdateModeToEditor = (editor, id, articles) => {
+  if (!id) return;
 
-  if (!editorId) return;
-
-  const { articlesData } = getSessionStorage(ARTICLES_KEY.ARTICLES);
-  const article = articlesData.find((article) => article.id === editorId);
+  const article = articles.find((article) => article.id === id);
   editor.setMarkdown(article.content || "");
 };
 
 // Note: 글 저장 작업 중
-const initializedSubmit = (editor) => () => {
-  const addNewArticle = (articles, content) => {
+const initializedSubmit = (id, articles) => {
+  const addNewArticle = (content) => {
     const newArticle = {
       id: crypto.randomUUID(),
       index: articles.length + 1,
@@ -39,18 +38,20 @@ const initializedSubmit = (editor) => () => {
     return [...articles, newArticle];
   };
 
-  const updateExistingArticle = (id, articles, content) => articles.map((article) => (article.id === id ? { ...article, content } : article));
+  const updateExistingArticle = (content) => articles.map((article) => (article.id === id ? { ...article, content } : article));
 
-  // // Note: submit 함수의 트리거 구현 필요
-  // const handleSubmit = () => {
-  //   const editorContent = editor.getMarkdown();
-  //   const updatedArticles = isUpdateMode ? updateExistingArticle(editorId, existingArticles, editorContent) : addNewArticle(existingArticles, editorContent);
-
-  //   setSessionStorage(KEY_LIST.ARTICLES, updatedArticles);
-  // };
+  return {
+    addNewArticle,
+    updateExistingArticle,
+  };
 };
 
 (() => {
+  const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
+
+  const { articlesData } = storageArticles;
+  const editorId = getSessionStorage(EDITOR_KEY.ID, "null");
+
   const editor = new toastui.Editor({
     el: document.querySelector("#editor"),
     previewStyle: "vertical",
@@ -60,5 +61,25 @@ const initializedSubmit = (editor) => () => {
   });
 
   setCharCounter(editor);
-  setUpdateModeToEditor(editor);
+  setUpdateModeToEditor(editor, editorId, articlesData);
+  const { addNewArticle, updateExistingArticle } = initializedSubmit(editorId, articlesData);
+
+  const handleMessage = (event) => {
+    console.log("🚀 ~ handleMessage ~ event:", event);
+    if (event.data === POST_MESSAGE.WRITE_SUBMIT) {
+      const editorContent = editor.getMarkdown();
+      const updatedArticles = editorId ? updateExistingArticle(editorContent) : addNewArticle(editorContent);
+      const updatedStorageArticles = {
+        ...storageArticles,
+        [ARTICLES_KEY.DATA]: updatedArticles,
+        [ARTICLES_KEY.LENGTH]: updatedArticles.length,
+      };
+      setSessionStorage(ARTICLES_KEY.ARTICLES, updatedStorageArticles);
+      navigateTo(ROUTER_PATH.BOARD_LIST);
+
+      window.removeEventListener("message", handleMessage);
+    }
+  };
+
+  window.addEventListener("message", handleMessage);
 })();
