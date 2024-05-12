@@ -1,12 +1,13 @@
 const executeScripts = (selector) => {
   const container = document.querySelector(selector);
   const scripts = Array.from(container.querySelectorAll("script"));
+  const timestamp = new Date().getTime();
   scripts.forEach((script) => {
     if (script.type === "module") {
       const newScript = document.createElement("script");
       newScript.type = "module";
       if (script.src) {
-        newScript.src = script.src;
+        newScript.src = `${script.src}?${timestamp}}`;
       } else {
         newScript.textContent = script.textContent;
       }
