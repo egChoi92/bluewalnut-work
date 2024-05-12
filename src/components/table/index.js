@@ -1,6 +1,7 @@
-import { ARTICLES_KEY } from "/src/js/constant.js";
+import { ARTICLES_KEY, EDITOR_KEY, ROUTER_PATH } from "/src/js/constant.js";
 import { renderTemplateLiteralToHtml } from "/src/js/htmlRenderer.js";
-import { getSessionStorage } from "/src/js/storage.js";
+import { navigateTo } from "/src/js/navigation.js";
+import { getSessionStorage, setSessionStorage } from "/src/js/storage.js";
 
 const maskString = (input) => {
   const string = input ?? "";
@@ -39,7 +40,7 @@ const { articlesData, articlesPerPage, articlesPagination } = getSessionStorage(
           (article) => `
             <div role="row">
               <div data-column="index" role="cell">${article.index}</div>
-              <div data-column="title" role="cell"><a href="/board/write/?id=${article.id}">${article.title}</a></div>
+              <div data-column="title" role="cell"><button type="button" value="${article.id}" class="title-button">${article.title}</button></div>
               <div data-column="author" role="cell">${maskString(article.author)}</div>
               <div data-column="date" role="cell">${article.date}</div>
               <div data-column="views" role="cell">${article.views}</div>
@@ -50,5 +51,14 @@ const { articlesData, articlesPerPage, articlesPagination } = getSessionStorage(
 
       return articlesTemplateLiteral;
     }
+  });
+
+  const titleButtonElements = document.querySelectorAll(".title-button");
+  titleButtonElements.forEach((element) => {
+    element.addEventListener("click", function (event) {
+      const { value } = event.target;
+      setSessionStorage(EDITOR_KEY.ID, value);
+      navigateTo(ROUTER_PATH.BOARD_WRITE);
+    });
   });
 })();

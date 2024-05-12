@@ -33,9 +33,9 @@ const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
     `;
   });
 
-  const paginationButtonElement = document.querySelectorAll(".pagination-button");
+  const paginationButtonElements = document.querySelectorAll(".pagination-button");
 
-  paginationButtonElement.forEach((element) => {
+  paginationButtonElements.forEach((element) => {
     element.addEventListener("click", function (event) {
       const { value } = event.target;
       const updatedStorageArticles = {

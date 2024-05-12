@@ -10,6 +10,7 @@ export const router = () => {
     case ROUTER_PATH.BOARD_LIST:
       loadHtmlContent(selector, "/src/page/list");
       break;
+    case ROUTER_PATH.BOARD_WRITE:
 
     default:
       break;
