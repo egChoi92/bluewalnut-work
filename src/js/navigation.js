@@ -1,18 +1,22 @@
 import { ROUTER_PATH } from "/src/js/constant.js";
 import { loadHtmlContent } from "/src/js/htmlRenderer.js";
+import initializeList from "/src/js/list/index.js";
 import { getCurrentUrlPathname } from "/src/js/urlUtils.js";
+import initializeWrite from "/src/js/write/index.js";
 
-export const router = () => {
+export const router = async () => {
   const selector = "#app";
   const path = getCurrentUrlPathname();
 
   switch (path) {
     case ROUTER_PATH.BOARD_LIST:
-      loadHtmlContent(selector, "/src/page/list");
+      await loadHtmlContent(selector, "/src/page/list");
+      initializeList();
       break;
     case ROUTER_PATH.BOARD_WRITE:
-      loadHtmlContent(selector, "/src/page/write");
+      await loadHtmlContent(selector, "/src/page/write");
 
+      initializeWrite();
     default:
       break;
   }

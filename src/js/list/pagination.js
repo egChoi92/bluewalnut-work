@@ -3,10 +3,10 @@ import { renderTemplateLiteralToHtml } from "/src/js/htmlRenderer.js";
 import { navigateTo } from "/src/js/navigation.js";
 import { getSessionStorage, setSessionStorage } from "/src/js/storage.js";
 
-const initializePagination = (selector, length, pagination) => {
+const renderPagination = (selector, length, pagination) => {
   const generateFirstLastButtonTemplateLiteral = (value, label, text) => {
     return `
-       <button type="button" value="${value}" class="pagination-button-box" aria-label="${label} 페이지로 이동" >${text}</button>
+       <button type="button" value="${value}" class="pagination-button pagination-button-box" aria-label="${label} 페이지로 이동" >${text}</button>
       `;
   };
 
@@ -33,9 +33,7 @@ const initializePagination = (selector, length, pagination) => {
 };
 
 const setPaginationButton = (articles) => {
-  const paginationButtonElements = document.querySelectorAll(".pagination-button");
-
-  paginationButtonElements.forEach((element) => {
+  document.querySelectorAll(".pagination-button").forEach((element) => {
     element.addEventListener("click", function (event) {
       const { value } = event.target;
       const updatedStorageArticles = {
@@ -49,12 +47,13 @@ const setPaginationButton = (articles) => {
   });
 };
 
-(() => {
-  const selector = "#pagination";
+const initializePagination = () => {
   const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
   const { articlesPerPage, articlesLength, articlesPagination } = storageArticles;
   const length = Math.ceil(articlesLength / articlesPerPage);
 
-  initializePagination(selector, length, articlesPagination);
+  renderPagination("#pagination", length, articlesPagination);
   setPaginationButton(storageArticles);
-})();
+};
+
+export default initializePagination;

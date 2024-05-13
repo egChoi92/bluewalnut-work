@@ -3,7 +3,7 @@ import { renderTemplateLiteralToHtml } from "/src/js/htmlRenderer.js";
 import { navigateTo } from "/src/js/navigation.js";
 import { getSessionStorage, setSessionStorage } from "/src/js/storage.js";
 
-const initializedPerPage = (selector, perPage) => {
+const renderPerPage = (selector, perPage) => {
   renderTemplateLiteralToHtml(selector, () => {
     const optionTemplateLiteral = PER_PAGE_LIST.map((value) => {
       const isSelect = value === perPage;
@@ -17,8 +17,7 @@ const initializedPerPage = (selector, perPage) => {
 };
 
 const setPerPageSelector = (selector, articles) => {
-  const element = document.querySelector(selector);
-  element.addEventListener("change", function (event) {
+  document.querySelector(selector).addEventListener("change", function (event) {
     const { value } = event.target;
     const updatedStorageArticles = {
       ...articles,
@@ -31,11 +30,13 @@ const setPerPageSelector = (selector, articles) => {
   });
 };
 
-(() => {
+const initializePerPage = () => {
   const selector = "#perPageSelector";
   const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
   const { articlesPerPage } = storageArticles;
 
-  initializedPerPage(selector, articlesPerPage);
+  renderPerPage(selector, articlesPerPage);
   setPerPageSelector(selector, storageArticles);
-})();
+};
+
+export default initializePerPage;

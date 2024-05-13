@@ -6,9 +6,7 @@
   text-align: left;
 }
 
-.button,
-.button-default,
-.button-primary {
+.button {
   display: inline-block;
   min-width: 50px;
   padding: 4px 10px;

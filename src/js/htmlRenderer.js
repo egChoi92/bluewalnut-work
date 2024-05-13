@@ -1,28 +1,10 @@
-const executeScripts = (selector) => {
-  const container = document.querySelector(selector);
-  const scripts = Array.from(container.querySelectorAll("script"));
-  const timestamp = new Date().getTime();
-  scripts.forEach((script) => {
-    if (script.type === "module") {
-      const newScript = document.createElement("script");
-      newScript.type = "module";
-      if (script.src) {
-        newScript.src = `${script.src}?${timestamp}}`;
-      } else {
-        newScript.textContent = script.textContent;
-      }
-      script.remove();
-      container.appendChild(newScript);
-    }
-  });
-};
-
 export const clearHtmlContent = (selector) => {
   const container = document.querySelector(selector);
   container.innerHTML = "";
 };
 
 export const renderTemplateLiteralToHtml = (selector, callbackFunction) => {
+  clearHtmlContent(selector);
   const container = document.querySelector(selector);
 
   const templateLiteral = callbackFunction();
@@ -32,16 +14,14 @@ export const renderTemplateLiteralToHtml = (selector, callbackFunction) => {
 };
 
 export const loadHtmlContent = async (selector, filePath) => {
+  clearHtmlContent(selector);
   try {
     const response = await fetch(filePath);
 
     if (!response.ok) throw new Error("응답에 실패했습니다.");
 
     const html = await response.text();
-
-    clearHtmlContent(selector);
     renderTemplateLiteralToHtml(selector, () => html);
-    executeScripts(selector);
   } catch (error) {
     console.error("HTML 에러:", error);
   }

@@ -3,7 +3,7 @@ import { renderTemplateLiteralToHtml } from "/src/js/htmlRenderer.js";
 import { navigateTo } from "/src/js/navigation.js";
 import { getSessionStorage, setSessionStorage } from "/src/js/storage.js";
 
-const initializeTable = (selector, articles, perPage, pagination) => {
+const renderTable = (selector, articles, perPage, pagination) => {
   const isEmpty = !articles || !articles.length;
 
   const maskString = (input) => {
@@ -52,8 +52,7 @@ const initializeTable = (selector, articles, perPage, pagination) => {
 };
 
 const setTitleButton = () => {
-  const titleButtonElements = document.querySelectorAll(".title-button");
-  titleButtonElements.forEach((element) => {
+  document.querySelectorAll(".title-button").forEach((element) => {
     element.addEventListener("click", function (event) {
       const { value } = event.target;
       setSessionStorage(EDITOR_KEY.ID, value);
@@ -62,10 +61,11 @@ const setTitleButton = () => {
   });
 };
 
-(() => {
-  const selector = "#tableBody";
+const initializeTable = () => {
   const { articlesData, articlesPerPage, articlesPagination } = getSessionStorage(ARTICLES_KEY.ARTICLES);
 
-  initializeTable(selector, articlesData, articlesPerPage, articlesPagination);
+  renderTable("#tableBody", articlesData, articlesPerPage, articlesPagination);
   setTitleButton();
-})();
+};
+
+export default initializeTable;
