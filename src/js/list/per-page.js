@@ -1,9 +1,10 @@
-import { ARTICLES_KEY, PER_PAGE_LIST, ROUTER_PATH } from "/src/js/constant.js";
+import { PER_PAGE_LIST } from "/src/js/constant.js";
 import { renderTemplateLiteralToHtml } from "/src/js/htmlRenderer.js";
-import { navigateTo } from "/src/js/navigation.js";
-import { getSessionStorage, setSessionStorage } from "/src/js/storage.js";
+import { router } from "/src/js/navigation.js";
+import { paginationState, perPageState } from "/src/js/state.js";
 
-const renderPerPage = (selector, perPage) => {
+const renderPerPage = (selector) => {
+  const perPage = perPageState.get();
   renderTemplateLiteralToHtml(selector, () => {
     const optionTemplateLiteral = PER_PAGE_LIST.map((value) => {
       const isSelect = value === perPage;
@@ -16,27 +17,20 @@ const renderPerPage = (selector, perPage) => {
   });
 };
 
-const setPerPageSelector = (selector, articles) => {
+const setPerPageSelector = (selector) => {
   document.querySelector(selector).addEventListener("change", function (event) {
     const { value } = event.target;
-    const updatedStorageArticles = {
-      ...articles,
-      [ARTICLES_KEY.PER_PAGE]: Number(value),
-      [ARTICLES_KEY.PAGINATION]: 1,
-    };
-    setSessionStorage(ARTICLES_KEY.ARTICLES, updatedStorageArticles);
-
-    navigateTo(ROUTER_PATH.BOARD_LIST);
+    perPageState.set(Number(value));
+    paginationState.set(1);
+    router();
   });
 };
 
 const initializePerPage = () => {
   const selector = "#perPageSelector";
-  const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
-  const { articlesPerPage } = storageArticles;
 
-  renderPerPage(selector, articlesPerPage);
-  setPerPageSelector(selector, storageArticles);
+  renderPerPage(selector);
+  setPerPageSelector(selector);
 };
 
 export default initializePerPage;

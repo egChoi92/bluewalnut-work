@@ -1,9 +1,15 @@
-import { ARTICLES_KEY, ROUTER_PATH } from "/src/js/constant.js";
+import { ARTICLES_KEY } from "/src/js/constant.js";
 import { renderTemplateLiteralToHtml } from "/src/js/htmlRenderer.js";
-import { navigateTo } from "/src/js/navigation.js";
-import { getSessionStorage, setSessionStorage } from "/src/js/storage.js";
+import { router } from "/src/js/navigation.js";
+import { paginationState, perPageState } from "/src/js/state.js";
+import { getSessionStorage } from "/src/js/storage.js";
 
-const renderPagination = (selector, length, pagination) => {
+const renderPagination = () => {
+  const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
+  const pagination = paginationState.get();
+  const perPage = perPageState.get();
+  const length = Math.ceil(storageArticles.length / perPage);
+
   const generateFirstLastButtonTemplateLiteral = (value, label, text) => {
     return `
        <button type="button" value="${value}" class="pagination-button pagination-button-box" aria-label="${label} 페이지로 이동" >${text}</button>
@@ -13,7 +19,7 @@ const renderPagination = (selector, length, pagination) => {
   const firstButtonTemplateLiteral = generateFirstLastButtonTemplateLiteral(1, "처음", "&lt;");
   const lastButtonTemplateLiteral = generateFirstLastButtonTemplateLiteral(length, "마지막", "&gt;");
 
-  renderTemplateLiteralToHtml(selector, () => {
+  renderTemplateLiteralToHtml("#pagination", () => {
     const paginationButtonTemplate = Array.from({ length }, (_, index) => {
       const pageIndex = index + 1;
       const isCurrentPage = pagination === pageIndex;
@@ -36,24 +42,15 @@ const setPaginationButton = (articles) => {
   document.querySelectorAll(".pagination-button").forEach((element) => {
     element.addEventListener("click", function (event) {
       const { value } = event.target;
-      const updatedStorageArticles = {
-        ...articles,
-        [ARTICLES_KEY.PAGINATION]: Number(value),
-      };
-      setSessionStorage(ARTICLES_KEY.ARTICLES, updatedStorageArticles);
-
-      navigateTo(ROUTER_PATH.BOARD_LIST);
+      paginationState.set(Number(value));
+      router();
     });
   });
 };
 
 const initializePagination = () => {
-  const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
-  const { articlesPerPage, articlesLength, articlesPagination } = storageArticles;
-  const length = Math.ceil(articlesLength / articlesPerPage);
-
-  renderPagination("#pagination", length, articlesPagination);
-  setPaginationButton(storageArticles);
+  renderPagination();
+  setPaginationButton();
 };
 
 export default initializePagination;

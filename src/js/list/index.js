@@ -6,8 +6,8 @@ import initializeTable from "/src/js/list/table.js";
 
 const initializeList = () => {
   initializeData();
-  initializeTable();
   initializePerPage();
+  initializeTable();
   initializePagination();
   initializeButton();
 };

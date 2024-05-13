@@ -3,10 +3,9 @@ import { generateAuthor, generateTitle } from "/src/js/generator.js";
 import { navigateTo } from "/src/js/navigation.js";
 import { editorState } from "/src/js/state.js";
 import { getSessionStorage, setSessionStorage } from "/src/js/storage.js";
-
 const initializeButton = () => {
   const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
-  const { articlesData } = storageArticles;
+
   const editorId = getSessionStorage(EDITOR_KEY.ID, "null");
 
   const editor = editorState.get();
@@ -14,7 +13,7 @@ const initializeButton = () => {
   const addNewArticle = (content) => {
     const newArticle = {
       id: crypto.randomUUID(),
-      index: articlesData.length + 1,
+      index: storageArticles.length + 1,
       title: `새로운 ${generateTitle()} 관련 글입니다.`,
       content,
       author: generateAuthor(),
@@ -22,24 +21,20 @@ const initializeButton = () => {
       views: 0,
     };
 
-    return [...articlesData, newArticle];
+    return [...storageArticles, newArticle];
   };
 
-  const updateExistingArticle = (content) => articlesData.map((article) => (article.id === editorId ? { ...article, content } : article));
+  const updateExistingArticle = (content) => storageArticles.map((article) => (article.id === editorId ? { ...article, content } : article));
 
   document.querySelector("#cancelButton").addEventListener("click", () => {
-    history.back();
+    navigateTo(ROUTER_PATH.BOARD_LIST);
   });
 
   document.querySelector("#submitButton").addEventListener("click", () => {
     const editorContent = editor.getMarkdown();
     const updatedArticles = editorId ? updateExistingArticle(editorContent) : addNewArticle(editorContent);
-    const updatedStorageArticles = {
-      ...storageArticles,
-      [ARTICLES_KEY.DATA]: updatedArticles,
-      [ARTICLES_KEY.LENGTH]: updatedArticles.length,
-    };
-    setSessionStorage(ARTICLES_KEY.ARTICLES, updatedStorageArticles);
+    setSessionStorage(ARTICLES_KEY.ARTICLES, updatedArticles);
+
     navigateTo(ROUTER_PATH.BOARD_LIST);
   });
 };

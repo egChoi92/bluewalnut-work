@@ -2,7 +2,8 @@ import { ARTICLES_KEY, EDITOR_KEY } from "/src/js/constant.js";
 import { editorState } from "/src/js/state.js";
 import { getSessionStorage } from "/src/js/storage.js";
 
-const setCharCounter = (editor) => {
+const setCharCounter = () => {
+  const editor = editorState.get();
   const charCountElement = document.querySelector("#charCount");
   editor.on("change", function (event) {
     const markdown = editor.getMarkdown();
@@ -14,31 +15,31 @@ const setCharCounter = (editor) => {
   });
 };
 
-const setUpdateModeToEditor = (editor, id, articles) => {
-  if (!id) return;
+const setUpdateModeToEditor = () => {
+  const editorId = getSessionStorage(EDITOR_KEY.ID, "null");
 
-  const article = articles.find((article) => article.id === id);
+  if (!editorId) return;
+
+  const editor = editorState.get();
+  const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
+
+  const article = storageArticles.find((article) => article.id === editorId);
   editor.setMarkdown(article.content || "");
 };
 
 const initializeEditor = () => {
-  const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
-
-  const { articlesData } = storageArticles;
-  const editorId = getSessionStorage(EDITOR_KEY.ID, "null");
-
   const editor = new toastui.Editor({
     el: document.querySelector("#editor"),
     previewStyle: "vertical",
-    height: "70vh",
+    height: "60vh",
     initialEditType: "wysiwyg",
     previewStyle: "vertical",
   });
 
   editorState.set(editor);
 
-  setCharCounter(editor);
-  setUpdateModeToEditor(editor, editorId, articlesData);
+  setCharCounter();
+  setUpdateModeToEditor();
 };
 
 export default initializeEditor;

@@ -1,12 +1,12 @@
+import { clearHtmlContent } from "./htmlRenderer.js";
 import { ROUTER_PATH } from "/src/js/constant.js";
 import { loadHtmlContent } from "/src/js/htmlRenderer.js";
 import initializeList from "/src/js/list/index.js";
-import { getCurrentUrlPathname } from "/src/js/urlUtils.js";
 import initializeWrite from "/src/js/write/index.js";
 
 export const router = async () => {
   const selector = "#app";
-  const path = getCurrentUrlPathname();
+  const path = new URL(window.location.href).pathname;
 
   switch (path) {
     case ROUTER_PATH.BOARD_LIST:
@@ -23,6 +23,8 @@ export const router = async () => {
 };
 
 export const navigateTo = (pathname) => {
+  const selector = "#app";
+  clearHtmlContent(selector);
   window.history.pushState({}, pathname, window.location.origin + pathname);
   router();
 };

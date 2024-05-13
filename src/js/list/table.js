@@ -1,10 +1,14 @@
 import { ARTICLES_KEY, EDITOR_KEY, ROUTER_PATH } from "/src/js/constant.js";
 import { renderTemplateLiteralToHtml } from "/src/js/htmlRenderer.js";
 import { navigateTo } from "/src/js/navigation.js";
+import { paginationState, perPageState } from "/src/js/state.js";
 import { getSessionStorage, setSessionStorage } from "/src/js/storage.js";
 
-const renderTable = (selector, articles, perPage, pagination) => {
-  const isEmpty = !articles || !articles.length;
+const renderTable = () => {
+  const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
+  const perPage = perPageState.get();
+  const pagination = paginationState.get();
+  const isEmpty = !storageArticles || !storageArticles.length;
 
   const maskString = (input) => {
     const string = input ?? "";
@@ -17,7 +21,7 @@ const renderTable = (selector, articles, perPage, pagination) => {
     return `${string.charAt(0)}${"*".repeat(Math.max(0, length - 2))}${length > 1 ? string.charAt(length - 1) : ""}`;
   };
 
-  renderTemplateLiteralToHtml(selector, () => {
+  renderTemplateLiteralToHtml("#tableBody", () => {
     if (isEmpty) {
       return `
         <div role="row">
@@ -25,8 +29,10 @@ const renderTable = (selector, articles, perPage, pagination) => {
         </div>
       `;
     } else {
-      const splittedData = articles.reduce((result, value, index) => {
-        if (index % perPage === 0) result.push([]);
+      const splittedData = storageArticles.reduce((result, value, index) => {
+        if (index % perPage === 0) {
+          result.push([]);
+        }
         result[result.length - 1].push(value);
         return result;
       }, []);
@@ -62,9 +68,7 @@ const setTitleButton = () => {
 };
 
 const initializeTable = () => {
-  const { articlesData, articlesPerPage, articlesPagination } = getSessionStorage(ARTICLES_KEY.ARTICLES);
-
-  renderTable("#tableBody", articlesData, articlesPerPage, articlesPagination);
+  renderTable();
   setTitleButton();
 };
 
