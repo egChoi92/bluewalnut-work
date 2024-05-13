@@ -4,11 +4,14 @@ import { navigateTo } from "/src/js/navigation.js";
 import { getSessionStorage, setSessionStorage } from "/src/js/storage.js";
 
 const initializePagination = (selector, length, pagination) => {
-  const generateFirstLastButtonTemplate = (value, label, text) => {
+  const generateFirstLastButtonTemplateLiteral = (value, label, text) => {
     return `
-       <button type="button" value=${value} class="pagination-button-box" aria-label="${label} 페이지로 이동" >${text}</button>
+       <button type="button" value="${value}" class="pagination-button-box" aria-label="${label} 페이지로 이동" >${text}</button>
       `;
   };
+
+  const firstButtonTemplateLiteral = generateFirstLastButtonTemplateLiteral(1, "처음", "&lt;");
+  const lastButtonTemplateLiteral = generateFirstLastButtonTemplateLiteral(length, "마지막", "&gt;");
 
   renderTemplateLiteralToHtml(selector, () => {
     const paginationButtonTemplate = Array.from({ length }, (_, index) => {
@@ -17,14 +20,14 @@ const initializePagination = (selector, length, pagination) => {
       const ariaCurrentPage = isCurrentPage ? 'aria-current="page"' : "";
 
       return `
-        <button type="button" value=${pageIndex} class="pagination-button" aria-label="${pageIndex} 페이지로 이동" ${ariaCurrentPage}>${pageIndex}</button>
+        <button type="button" value="${pageIndex}" class="pagination-button" aria-label="${pageIndex} 페이지로 이동" ${ariaCurrentPage}>${pageIndex}</button>
       `;
     }).join(" ");
 
     return `
-      ${generateFirstLastButtonTemplate(1, "처음", "&lt;")}
+      ${firstButtonTemplateLiteral}
       ${paginationButtonTemplate}
-      ${generateFirstLastButtonTemplate(length, "마지막", "&gt;")}
+      ${lastButtonTemplateLiteral}
     `;
   });
 };

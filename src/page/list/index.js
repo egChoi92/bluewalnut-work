@@ -18,6 +18,7 @@ const renderDOM = async () => {
     TABLE_CONTAINER: "#tableContainer",
     FOOTER: "#footer",
   };
+
   await loadHtmlContent(Selectors.HEADER, "/src/components/per-page");
   await loadHtmlContent(Selectors.TABLE_CONTAINER, "/src/components/table");
   await loadHtmlContent(Selectors.FOOTER, "/src/components/pagination");
