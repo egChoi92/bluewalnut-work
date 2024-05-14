@@ -46,3 +46,19 @@ export const paginationState = (() => {
     set,
   };
 })();
+
+export const articleIdState = (() => {
+  let state = null;
+  const get = () => {
+    return state;
+  };
+
+  const set = (data) => {
+    state = data;
+  };
+
+  return {
+    get,
+    set,
+  };
+})();

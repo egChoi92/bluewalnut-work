@@ -1,5 +1,5 @@
-import { ARTICLES_KEY, EDITOR_KEY } from "/src/js/constant.js";
-import { editorState } from "/src/js/state.js";
+import { ARTICLES_KEY } from "/src/js/constant.js";
+import { articleIdState, editorState } from "/src/js/state.js";
 import { getSessionStorage } from "/src/js/storage.js";
 
 const setCharCounter = () => {
@@ -16,7 +16,7 @@ const setCharCounter = () => {
 };
 
 const setUpdateModeToEditor = () => {
-  const editorId = getSessionStorage(EDITOR_KEY.ID, "null");
+  const editorId = articleIdState.get();
 
   if (!editorId) return;
 

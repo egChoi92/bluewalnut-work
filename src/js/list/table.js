@@ -1,8 +1,9 @@
-import { ARTICLES_KEY, EDITOR_KEY, ROUTER_PATH } from "/src/js/constant.js";
+import { updateStorageArticles } from "/src/js/article.js";
+import { ARTICLES_KEY, ROUTER_PATH } from "/src/js/constant.js";
 import { renderTemplateLiteralToHtml } from "/src/js/htmlRenderer.js";
 import { navigateTo } from "/src/js/navigation.js";
-import { paginationState, perPageState } from "/src/js/state.js";
-import { getSessionStorage, setSessionStorage } from "/src/js/storage.js";
+import { articleIdState, paginationState, perPageState } from "/src/js/state.js";
+import { getSessionStorage } from "/src/js/storage.js";
 
 const renderTable = () => {
   const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
@@ -60,8 +61,12 @@ const renderTable = () => {
 const setTitleButton = () => {
   document.querySelectorAll(".title-button").forEach((element) => {
     element.addEventListener("click", function (event) {
-      const { value } = event.target;
-      setSessionStorage(EDITOR_KEY.ID, value);
+      const { value: id } = event.target;
+      const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
+      const views = storageArticles.find((article) => article.id === id).views;
+
+      articleIdState.set(id);
+      updateStorageArticles(id, { views: views + 1 });
       navigateTo(ROUTER_PATH.BOARD_WRITE);
     });
   });

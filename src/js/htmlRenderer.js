@@ -28,18 +28,3 @@ export const loadHtmlContent = async (selector, filePath) => {
     console.error("HTML 에러:", error);
   }
 };
-
-export const createButton = (type, text, className, onClickAction) => {
-  const button = document.createElement("button");
-  button.type = type;
-  button.textContent = text;
-  button.className = className;
-  button.addEventListener("click", onClickAction);
-
-  return button;
-};
-
-export const appendChild = (selector, child) => {
-  const footerElement = document.querySelector(selector);
-  footerElement.appendChild(child);
-};

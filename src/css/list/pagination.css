@@ -16,10 +16,6 @@
   text-align: center;
 }
 
-.pagination-button:hover {
-  text-decoration: underline;
-}
-
 .pagination-button[aria-current="page"] {
   border: 1px solid #666;
 }
