@@ -4,5 +4,7 @@ import { navigateTo, router } from "/src/js/navigation.js";
 window.addEventListener("popstate", router);
 
 document.addEventListener("DOMContentLoaded", function () {
-  navigateTo(ROUTER_PATH.BOARD_LIST);
+  const path = new URL(window.location.href).pathname;
+
+  if (path === "/") navigateTo(ROUTER_PATH.BOARD_LIST);
 });

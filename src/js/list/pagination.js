@@ -1,9 +1,9 @@
+import initializePerPage from "./perPage.js";
 import { ARTICLES_KEY } from "/src/js/constant.js";
 import { renderTemplateLiteralToHtml } from "/src/js/htmlRenderer.js";
-import { router } from "/src/js/navigation.js";
+import initializeTable from "/src/js/list/table.js";
 import { paginationState, perPageState } from "/src/js/state.js";
 import { getSessionStorage } from "/src/js/storage.js";
-
 const renderPagination = () => {
   const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
   const pagination = paginationState.get();
@@ -38,12 +38,15 @@ const renderPagination = () => {
   });
 };
 
-const setPaginationButton = (articles) => {
+const setPaginationButton = () => {
   document.querySelectorAll(".pagination-button").forEach((element) => {
     element.addEventListener("click", function (event) {
       const { value } = event.target;
       paginationState.set(Number(value));
-      router();
+
+      initializePagination();
+      initializePerPage();
+      initializeTable();
     });
   });
 };

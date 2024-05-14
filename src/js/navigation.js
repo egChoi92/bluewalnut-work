@@ -15,7 +15,6 @@ export const router = async () => {
       break;
     case ROUTER_PATH.BOARD_WRITE:
       await loadHtmlContent(selector, "/src/page/write");
-
       initializeWrite();
     default:
       break;
@@ -23,8 +22,7 @@ export const router = async () => {
 };
 
 export const navigateTo = (pathname) => {
-  const selector = "#app";
-  clearHtmlContent(selector);
+  clearHtmlContent("#app");
   window.history.pushState({}, pathname, window.location.origin + pathname);
   router();
 };

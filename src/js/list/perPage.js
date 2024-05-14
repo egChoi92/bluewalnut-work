@@ -1,11 +1,12 @@
+import initializePagination from "./pagination.js";
 import { PER_PAGE_LIST } from "/src/js/constant.js";
 import { renderTemplateLiteralToHtml } from "/src/js/htmlRenderer.js";
-import { router } from "/src/js/navigation.js";
+import initializeTable from "/src/js/list/table.js";
 import { paginationState, perPageState } from "/src/js/state.js";
 
-const renderPerPage = (selector) => {
+const renderPerPage = () => {
   const perPage = perPageState.get();
-  renderTemplateLiteralToHtml(selector, () => {
+  renderTemplateLiteralToHtml("#perPageSelector", () => {
     const optionTemplateLiteral = PER_PAGE_LIST.map((value) => {
       const isSelect = value === perPage;
       const selected = isSelect ? "selected" : "";
@@ -17,20 +18,20 @@ const renderPerPage = (selector) => {
   });
 };
 
-const setPerPageSelector = (selector) => {
-  document.querySelector(selector).addEventListener("change", function (event) {
-    const { value } = event.target;
-    perPageState.set(Number(value));
+const setPerPageSelector = () => {
+  document.querySelector("#perPageSelector").addEventListener("change", function (event) {
+    const { value: id } = event.target;
+    perPageState.set(Number(id));
     paginationState.set(1);
-    router();
+
+    initializePagination();
+    initializeTable();
   });
 };
 
 const initializePerPage = () => {
-  const selector = "#perPageSelector";
-
-  renderPerPage(selector);
-  setPerPageSelector(selector);
+  renderPerPage();
+  setPerPageSelector();
 };
 
 export default initializePerPage;

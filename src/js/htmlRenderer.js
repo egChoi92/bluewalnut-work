@@ -15,7 +15,7 @@ export const renderTemplateLiteralToHtml = (selector, callbackFunction) => {
 
 export const loadHtmlContent = async (selector, filePath) => {
   const container = document.querySelector(selector);
-  if (container.childElementCount) return;
+  if (container.childElementCount > 0) return;
 
   try {
     const response = await fetch(filePath);
