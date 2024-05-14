@@ -1,4 +1,3 @@
-import { clearHtmlContent } from "./htmlRenderer.js";
 import { ROUTER_PATH } from "/src/js/constant.js";
 import { loadHtmlContent } from "/src/js/htmlRenderer.js";
 import initializeList from "/src/js/list/index.js";
@@ -22,7 +21,6 @@ export const router = async () => {
 };
 
 export const navigateTo = (pathname) => {
-  clearHtmlContent("#app");
   window.history.pushState({}, pathname, window.location.origin + pathname);
   router();
 };
