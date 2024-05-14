@@ -43,11 +43,11 @@ const renderTable = () => {
         .map(
           (article) => `
             <div role="row">
-              <div data-column="index" role="cell">${article.index}</div>
-              <div data-column="title" role="cell"><button type="button" value="${article.id}" class="title-button">${article.title}</button></div>
-              <div data-column="author" role="cell">${maskString(article.author)}</div>
-              <div data-column="date" role="cell">${article.date}</div>
-              <div data-column="views" role="cell">${article.views}</div>
+              <div role="cell" data-column="index">${article.index}</div>
+              <div role="cell" data-column="title"><button type="button" value="${article.id}" class="title-button">${article.title}</button></div>
+              <div role="cell" data-column="author">${maskString(article.author)}</div>
+              <div role="cell" data-column="date">${article.date}</div>
+              <div role="cell" data-column="views">${article.views}</div>
             </div>
           `
         )

@@ -10,7 +10,7 @@ const renderPerPage = (selector) => {
       const isSelect = value === perPage;
       const selected = isSelect ? "selected" : "";
 
-      return `<option value="${value}" ${selected} aria-label="항목 ${value}개씩 보기" >${value}개씩 보기</option>`;
+      return `<option value="${value}" aria-label="항목 ${value}개씩 보기" ${selected}>${value}개씩 보기</option>`;
     }).join(" ");
 
     return optionTemplateLiteral;

@@ -1,14 +1,17 @@
+<header class="header">
+  <h1>글쓰기</h1>
+</header>
 <main class="main">
-  <h1 hidden>상세 화면</h1>
-  <header id="header" class="header"></header>
   <section>
-    <h2 hidden>글 작성</h2>
-    <div id="editor" class="editor" role="application" aria-label="텍스트 편집기" aria-describedby="editorDescription"></div>
-    <p id="editorDescription" hidden>텍스트 편집기 사용법: shift+tab을 누르면 편집 툴바로 이동합니다. alt+tab을 누르면 편집기에서 벗어납니다</p>
-    <div class="char-count-text" aria-live="polite">현재 입력된 글자 수 : <span id="charCount">0</span> (byte)</div>
+    <h2 hidden>편집기</h2>
+    <div class="editor-container">
+      <div id="editor" class="editor" role="application" aria-label="텍스트 편집기" aria-describedby="editorDescription"></div>
+      <p id="editorDescription" hidden>텍스트 편집기 사용법: shift+tab을 누르면 편집 툴바로 이동합니다. alt+tab을 누르면 편집기에서 벗어납니다</p>
+    </div>
+    <div class="char-count-text" aria-live="polite">현재 입력된 글자 수:&nbsp;<span id="charCount">0</span> (byte)</div>
   </section>
-  <footer id="footer" class="footer">
-    <button type="button" id="cancelButton" class="button button-default">취소</button>
-    <button type="button" id="submitButton" class="button button-primary">저장</button>
-  </footer>
 </main>
+<footer class="footer">
+  <button type="button" id="cancelButton" class="button button-default">취소</button>
+  <button type="button" id="submitButton" class="button button-primary">저장</button>
+</footer>

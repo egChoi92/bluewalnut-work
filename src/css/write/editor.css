@@ -1,7 +1,8 @@
-.editor {
+.editor-container {
   height: 60vh;
 }
 
 .char-count-text {
+  margin-top: var(--gap-1);
   text-align: right;
 }

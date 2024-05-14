@@ -27,7 +27,7 @@ export const generateData = (length = 40) => {
       id: crypto.randomUUID(),
       index: articleIndex,
       title: `${articleTitle} 관련 글입니다.`,
-      content: `안녕하세요, ${articleAuthor}입니다. \n${articleTitle} 게시판에 글을 남깁니다. \n감사합니다. \n작성일자: ${articleDate}`,
+      content: `최초 작성일자: ${articleDate} \n\n안녕하세요. \n${articleTitle} 게시판에 글을 남깁니다. \n\n감사합니다.`,
       author: articleAuthor,
       date: articleDate,
       views: getRandomInt(0, 500),

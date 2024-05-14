@@ -31,7 +31,7 @@ const initializeEditor = () => {
   const editor = new toastui.Editor({
     el: document.querySelector("#editor"),
     previewStyle: "vertical",
-    height: "60vh",
+    height: "100%",
     initialEditType: "wysiwyg",
     previewStyle: "vertical",
   });

@@ -1,18 +1,29 @@
-.main {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.app {
+  display: grid;
+  gap: var(--gap-2);
+  overflow: hidden;
   width: 100%;
   max-width: 1000px;
-  margin: auto;
-  padding: 5vh 5vw;
+  margin: var(--gap-6) auto;
+  padding: var(--gap-6);
+  box-sizing: content-box;
 }
 
-.header,
+.header {
+  padding: var(--gap-3);
+  color: var(--color-primary);
+  text-align: center;
+}
+
+.section {
+  display: grid;
+  gap: var(--gap-1);
+}
+
 .footer {
   display: flex;
   justify-content: end;
-  gap: 4px;
+  gap: var(--gap-1);
 }
 
 .table-container {
