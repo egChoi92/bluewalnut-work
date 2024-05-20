@@ -1,6 +1,6 @@
-import { ROUTER_PATH } from "/src/js/constant.js";
-import { navigateTo } from "/src/js/navigation.js";
-import { articleIdState } from "/src/js/state.js";
+import { ROUTER_PATH } from "/src/js/common/constant.js";
+import { navigateTo } from "/src/js/common/navigation.js";
+import { articleIdState } from "/src/js/common/state.js";
 
 const initializeButton = () => {
   const clickWriteButton = () => {

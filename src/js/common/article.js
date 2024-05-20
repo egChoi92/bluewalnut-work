@@ -1,6 +1,6 @@
-import { ARTICLES_KEY } from "/src/js/constant.js";
-import { generateAuthor, generateTitle } from "/src/js/generator.js";
-import { getSessionStorage, setSessionStorage } from "/src/js/storage.js";
+import { ARTICLES_KEY } from "/src/js/common/constant.js";
+import { generateAuthor, generateTitle } from "/src/js/common/generator.js";
+import { getSessionStorage, setSessionStorage } from "/src/js/common/storage.js";
 
 export const postStorageArticles = (content) => {
   const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);

@@ -1,4 +1,4 @@
-import { PER_PAGE_LIST } from "/src/js/constant.js";
+import { PER_PAGE_LIST } from "/src/js/common/constant.js";
 export const editorState = (() => {
   let state = null;
   const get = () => {

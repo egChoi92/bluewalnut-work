@@ -1,6 +1,6 @@
-import { ARTICLES_KEY } from "/src/js/constant.js";
-import { articleIdState, editorState } from "/src/js/state.js";
-import { getSessionStorage } from "/src/js/storage.js";
+import { ARTICLES_KEY } from "/src/js/common/constant.js";
+import { articleIdState, editorState } from "/src/js/common/state.js";
+import { getSessionStorage } from "/src/js/common/storage.js";
 
 const setCharCounter = () => {
   const editor = editorState.get();

@@ -1,5 +1,5 @@
-import { ROUTER_PATH } from "/src/js/constant.js";
-import { loadHtmlContent } from "/src/js/htmlRenderer.js";
+import { ROUTER_PATH } from "/src/js/common/constant.js";
+import { loadHtmlContent } from "/src/js/common/htmlRenderer.js";
 import initializeList from "/src/js/list/index.js";
 import initializeWrite from "/src/js/write/index.js";
 

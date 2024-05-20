@@ -1,5 +1,5 @@
-import { ARTICLES_KEY } from "/src/js/constant.js";
-import { setSessionStorage } from "/src/js/storage.js";
+import { ARTICLES_KEY } from "/src/js/common/constant.js";
+import { setSessionStorage } from "/src/js/common/storage.js";
 
 const titles = ["공지사항", "FAQ", "Q&A", "뉴스", "소개"];
 const authors = ["박민", "최은광", "블루월넛", "홍길동", "김철수", "이영희"];

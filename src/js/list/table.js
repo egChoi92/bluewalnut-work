@@ -1,9 +1,9 @@
-import { updateStorageArticles } from "/src/js/article.js";
-import { ARTICLES_KEY, ROUTER_PATH } from "/src/js/constant.js";
-import { renderTemplateLiteralToHtml } from "/src/js/htmlRenderer.js";
-import { navigateTo } from "/src/js/navigation.js";
-import { articleIdState, paginationState, perPageState } from "/src/js/state.js";
-import { getSessionStorage } from "/src/js/storage.js";
+import { updateStorageArticles } from "/src/js/common/article.js";
+import { ARTICLES_KEY, ROUTER_PATH } from "/src/js/common/constant.js";
+import { renderTemplateLiteralToHtml } from "/src/js/common/htmlRenderer.js";
+import { navigateTo } from "/src/js/common/navigation.js";
+import { articleIdState, paginationState, perPageState } from "/src/js/common/state.js";
+import { getSessionStorage } from "/src/js/common/storage.js";
 
 const renderTable = () => {
   const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);

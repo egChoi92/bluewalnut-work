@@ -1,6 +1,6 @@
-import { ARTICLES_KEY } from "/src/js/constant.js";
-import { generateData } from "/src/js/generator.js";
-import { getSessionStorage, hasSessionStorage } from "/src/js/storage.js";
+import { ARTICLES_KEY } from "/src/js/common/constant.js";
+import { generateData } from "/src/js/common/generator.js";
+import { getSessionStorage, hasSessionStorage } from "/src/js/common/storage.js";
 
 const initializeData = () => {
   if (!hasSessionStorage(ARTICLES_KEY.ARTICLES)) {

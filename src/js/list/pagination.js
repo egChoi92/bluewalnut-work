@@ -1,9 +1,9 @@
-import initializePerPage from "./perPage.js";
-import { ARTICLES_KEY } from "/src/js/constant.js";
-import { renderTemplateLiteralToHtml } from "/src/js/htmlRenderer.js";
+import { ARTICLES_KEY } from "/src/js/common/constant.js";
+import { renderTemplateLiteralToHtml } from "/src/js/common/htmlRenderer.js";
+import { paginationState, perPageState } from "/src/js/common/state.js";
+import { getSessionStorage } from "/src/js/common/storage.js";
+import initializePerPage from "/src/js/list/perPage.js";
 import initializeTable from "/src/js/list/table.js";
-import { paginationState, perPageState } from "/src/js/state.js";
-import { getSessionStorage } from "/src/js/storage.js";
 const renderPagination = () => {
   const storageArticles = getSessionStorage(ARTICLES_KEY.ARTICLES);
   const pagination = paginationState.get();

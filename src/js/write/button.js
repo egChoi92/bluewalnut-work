@@ -1,7 +1,7 @@
-import { postStorageArticles, updateStorageArticles } from "/src/js/article.js";
-import { ROUTER_PATH } from "/src/js/constant.js";
-import { navigateTo } from "/src/js/navigation.js";
-import { articleIdState, editorState } from "/src/js/state.js";
+import { postStorageArticles, updateStorageArticles } from "/src/js/common/article.js";
+import { ROUTER_PATH } from "/src/js/common/constant.js";
+import { navigateTo } from "/src/js/common/navigation.js";
+import { articleIdState, editorState } from "/src/js/common/state.js";
 const initializeButton = () => {
   const editorId = articleIdState.get();
   const editor = editorState.get();
