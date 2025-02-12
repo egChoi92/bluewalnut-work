@@ -6,5 +6,5 @@ window.addEventListener("popstate", router);
 document.addEventListener("DOMContentLoaded", function () {
   const path = new URL(window.location.href).pathname;
 
-  if (path === "/") navigateTo(ROUTER_PATH.BOARD_LIST);
+  if (path === "/") navigateTo(ROUTER_PATH.TEST);
 });

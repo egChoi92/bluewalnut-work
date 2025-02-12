@@ -15,6 +15,9 @@ export const router = async () => {
     case ROUTER_PATH.BOARD_WRITE:
       await loadHtmlContent(selector, "/src/page/write");
       initializeWrite();
+    case ROUTER_PATH.TEST:
+      await loadHtmlContent(selector, "/src/page/test");
+      initializeWrite();
     default:
       break;
   }
